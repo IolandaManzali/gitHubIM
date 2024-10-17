@@ -1,0 +1,19 @@
+services:
+  oracle-db:
+    image: container-registry.oracle.com/database/free:23.5.0.0-amd64
+    container_name: oracle-db
+    ports:
+      - "1521:1521"  # Porta do Oracle Database
+      - "5500:5500"  # Porta do Oracle EM Express
+    environment:
+      - ORACLE_SID=FREE
+      - ORACLE_PDB=FREEPDB1
+      - ORACLE_PWD=YourSecurePasswordHere
+      - ORACLE_MEMORY=2GB
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    restart: unless-stopped
+
+volumes:
+  oracle-data:
+    driver: local
